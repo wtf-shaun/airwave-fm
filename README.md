@@ -28,4 +28,4 @@ Each user authorizes their own Spotify account. Playback controls require Spotif
 
 ## Airwave Meet
 
-Airwave Meet creates a shareable room URL with listener presence, chat, and a shared now-playing signal. The current static build syncs between open tabs and windows on the same browser origin using `BroadcastChannel`; cross-device rooms require adding a realtime backend such as WebSockets or a hosted realtime database.
+Airwave Meet creates a shareable room URL with listener presence, chat, and a shared now-playing signal. PeerJS provides the browser-to-browser room connection, so guests can join from another computer without Spotify authorization. Deploy the app over HTTPS for PeerJS networking to work; `BroadcastChannel` remains as the local-tab fallback.
