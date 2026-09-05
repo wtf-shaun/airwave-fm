@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e8e1d5">
+  <title>Airwave FM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-noise" aria-hidden="true"></div>
+  <main class="radio-shell">
+    <header class="topbar">
+      <a class="brand" href="." aria-label="Airwave FM home">
+        <span class="brand-mark">AF</span>
+        <span>Airwave <em>FM</em></span>
+      </a>
+      <div class="signal-status"><span class="signal-dot"></span><span id="connection-label">OFF AIR</span></div>
+    </header>
+
+    <section class="hero-grid">
+      <div class="intro-copy">
+        <p class="eyebrow">Your private listening room</p>
+        <h1>A little radio<br><i>for your records.</i></h1>
+        <p class="lede">A warm, quiet window into whatever is playing on Spotify right now.</p>
+        <button id="connect-button" class="connect-button" type="button"><span class="button-icon">&#9654;</span> Tune into Spotify</button>
+        <p id="setup-note" class="setup-note">Add your Spotify Client ID in <code>app.js</code> to begin.</p>
+      </div>
+
+      <div class="radio-stage" id="radio-stage">
+        <div class="stage-light"></div>
+        <div class="antenna"><span></span></div>
+        <div class="radio" aria-label="Retro radio player">
+          <div class="radio-top"><span>STEREO</span><span>FM / AM</span></div>
+          <div class="radio-face">
+            <div class="dial-window"><span class="dial-mark mark-one"></span><span class="dial-mark mark-two"></span><span class="dial-mark mark-three"></span><div class="radio-track"><b id="radio-track-title">AIRWAVE FM</b><small id="radio-track-artist">READY FOR A SIGNAL</small></div><span class="dial-frequency" id="dial-frequency">88.4 <small>FM</small></span></div>
+            <div class="tuner-line"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="speaker"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+          <div class="radio-controls"><button class="transport-button" id="radio-previous-button" type="button" aria-label="Previous track">&#9198;</button><button class="knob knob-small" id="refresh-button" type="button" aria-label="Refresh playback"><span></span></button><div class="brand-plate">AIRWAVE</div><button class="knob" id="pause-button" type="button" aria-label="Play or pause Spotify"><span></span></button><button class="transport-button" id="radio-next-button" type="button" aria-label="Next track">&#9197;</button></div>
+          <div class="radio-foot"></div>
+        </div>
+        <div class="stage-shadow"></div>
+      </div>
+    </section>
+
+    <section class="now-playing" aria-live="polite">
+      <div class="album-art-wrap"><div class="album-art" id="album-art"><span class="album-placeholder">&#9835;</span></div><span class="art-sheen"></span></div>
+      <div class="track-copy"><p class="eyebrow">Now transmitting</p><h2 id="track-title">Nothing is playing yet</h2><p id="track-artist">Connect Spotify to bring the radio to life.</p><p id="track-album"></p></div>
+      <div class="track-meta"><span id="track-time">0:00 / 0:00</span><div class="progress-track"><span id="progress-bar"></span></div><span id="device-name">AIRWAVE FM</span></div>
+    </section>
+
+    <section class="meet-section" aria-labelledby="meet-heading">
+      <div class="meet-intro">
+        <p class="eyebrow">Airwave Meet</p>
+        <h2 id="meet-heading">Listen in<br><i>good company.</i></h2>
+        <p>Make a room, invite a friend, and keep the same song in the air. Your Spotify account stays private.</p>
+        <div class="meet-room-line"><span class="meet-live-dot"></span><span id="room-status">Create a room to begin</span></div>
+      </div>
+      <div class="meet-panel">
+        <div class="meet-panel-head">
+          <div><span class="panel-label">Listening room</span><strong id="room-name">No room yet</strong></div>
+          <button id="copy-room-button" class="icon-button" type="button" aria-label="Copy room link" title="Copy room link" disabled>&#128203;</button>
+        </div>
+        <div class="room-form" id="room-form">
+          <label for="room-input">Room name</label>
+          <div class="room-input-row"><input id="room-input" type="text" maxlength="24" placeholder="late night FM"><button id="create-room-button" class="meet-button" type="button">Create room</button></div>
+        </div>
+        <div class="room-content" id="room-content" hidden>
+          <div class="room-now-playing"><span class="panel-label">Shared signal</span><strong id="shared-track">Waiting for the host to play a song</strong><span id="shared-artist">Anyone in the room can chat while they listen.</span></div>
+          <div class="people-row"><span class="panel-label">In the room</span><div id="people-list" class="people-list"></div></div>
+          <div class="chat-log" id="chat-log" aria-live="polite"></div>
+          <form class="chat-form" id="chat-form"><input id="chat-input" type="text" maxlength="120" placeholder="Say something to the room" autocomplete="off"><button class="send-button" type="submit" aria-label="Send message" title="Send message">&#8594;</button></form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-row"><span id="status-message">Waiting for a signal</span><span id="next-track">Next up: queue is empty</span><span>PKCE SECURE</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
