@@ -70,7 +70,12 @@
           <div class="room-input-row"><input id="room-input" type="text" maxlength="24" placeholder="late night FM"><button id="create-room-button" class="meet-button" type="button">Create room</button></div>
         </div>
         <div class="room-content" id="room-content" hidden>
-          <div class="room-now-playing"><span class="panel-label">Shared signal</span><strong id="shared-track">Waiting for the host to play a song</strong><span id="shared-artist">Anyone in the room can chat while they listen.</span><a id="shared-track-link" class="spotify-link" href="#" target="_blank" rel="noreferrer" hidden>Open in Spotify &#8599;</a></div>
+          <div class="video-meet">
+            <div class="video-meet-head"><div><span class="panel-label">Live room</span><strong>See who is listening</strong></div><div class="video-actions"><button id="camera-button" class="meet-button" type="button">Join camera</button><button id="mic-button" class="media-button" type="button" aria-label="Mute microphone" title="Mute microphone" disabled>&#127908;</button><button id="video-button" class="media-button" type="button" aria-label="Turn camera off" title="Turn camera off" disabled>&#128249;</button></div></div>
+            <div id="video-grid" class="video-grid"><div class="video-empty" id="video-empty">Turn on your camera to join the room.</div></div>
+          </div>
+          <div class="room-now-playing"><span class="panel-label">Shared signal</span><strong id="shared-track">Waiting for the host to play a song</strong><span id="shared-artist">Anyone in the room can chat while they listen.</span><div class="shared-track-actions"><a id="shared-track-link" class="spotify-link" href="#" target="_blank" rel="noreferrer" hidden>Open in Spotify &#8599;</a><button id="sync-track-button" class="sync-button" type="button" hidden>Sync to my Spotify</button></div></div>
+          <div class="genre-picker"><span class="panel-label">Pick the next signal</span><div class="genre-picker-row"><select id="genre-select" aria-label="Music genre"><option value="indie">Indie</option><option value="pop">Pop</option><option value="rock">Rock</option><option value="hip-hop">Hip-hop</option><option value="jazz">Jazz</option><option value="classical">Classical</option><option value="electronic">Electronic</option><option value="r-and-b">R&amp;B</option><option value="country">Country</option><option value="reggae">Reggae</option></select><button id="random-track-button" class="meet-button" type="button">Random track</button></div><small>Plays inside Airwave for your connected Spotify account.</small></div>
           <div class="people-row"><span class="panel-label">In the room</span><div id="people-list" class="people-list"></div></div>
           <div class="chat-log" id="chat-log" aria-live="polite"></div>
           <form class="chat-form" id="chat-form"><input id="chat-input" type="text" maxlength="120" placeholder="Say something to the room" autocomplete="off"><button class="send-button" type="submit" aria-label="Send message" title="Send message">&#8594;</button></form>
@@ -81,6 +86,8 @@
     <footer class="footer-row"><span id="status-message">Waiting for a signal</span><span id="next-track">Next up: queue is empty</span><span>PKCE SECURE</span></footer>
   </main>
   <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script>window.onSpotifyWebPlaybackSDKReady = () => { window.spotifySdkReady = true; window.dispatchEvent(new Event("spotify-sdk-ready")); };</script>
+  <script src="https://sdk.scdn.co/spotify-player.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

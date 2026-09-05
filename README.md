@@ -29,3 +29,11 @@ Each user authorizes their own Spotify account. Playback controls require Spotif
 ## Airwave Meet
 
 Airwave Meet creates a shareable room URL with listener presence, chat, and a shared now-playing signal. PeerJS provides the browser-to-browser room connection, so guests can join from another computer without Spotify authorization. Deploy the app over HTTPS for PeerJS networking to work; `BroadcastChannel` remains as the local-tab fallback.
+
+### Camera rooms
+
+Inside a room, choose **Join camera** and allow camera/microphone access. Other participants appear in the live video grid, and each person can mute their microphone or turn their camera off. Camera access requires an HTTPS deployment or `localhost`; it will usually be blocked when opening `index.html` directly with a `file://` URL.
+
+Guests can optionally connect their own Spotify account and choose **Sync to my Spotify**. Airwave sends the host's track URI and estimated position; each guest's Spotify app then starts that song locally. Spotify Premium and an active playback device are required, and the app never relays the host's audio.
+
+The room also includes Spotify Web Playback SDK support. After connecting Spotify, choose a genre and press **Random track** to play a matching track inside the Airwave page. Browser playback requires Spotify Premium, HTTPS, and the user's click to start playback.
