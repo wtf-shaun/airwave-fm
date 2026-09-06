@@ -24,11 +24,11 @@ Then open `http://localhost:3000/`. Add this exact local URL to Spotify Redirect
 
     http://localhost:3000/
 
-Each user authorizes their own Spotify account. Playback controls require Spotify Premium and an active Spotify device.
+Each user authorizes their own Spotify account. Playback controls require Spotify Premium and an active Spotify device. The app requests `streaming`, `user-read-email`, `user-read-private`, `user-modify-playback-state`, and `user-read-playback-state`.
 
 ## Airwave Meet
 
-Airwave Meet creates a shareable room URL with listener presence, chat, and a shared now-playing signal. PeerJS provides the browser-to-browser room connection, so guests can join from another computer without Spotify authorization. Deploy the app over HTTPS for PeerJS networking to work; `BroadcastChannel` remains as the local-tab fallback.
+Airwave Meet creates a shareable room URL with listener presence, chat, and a shared now-playing signal. Each participant authorizes their own Spotify account when they want synchronized playback. PeerJS provides the browser-to-browser room connection; deploy the app over HTTPS for cross-computer networking, while `BroadcastChannel` remains as the local-tab fallback.
 
 ### Camera rooms
 
@@ -36,4 +36,8 @@ Inside a room, choose **Join camera** and allow camera/microphone access. Other 
 
 Guests can optionally connect their own Spotify account and choose **Sync to my Spotify**. Airwave sends the host's track URI and estimated position; each guest's Spotify app then starts that song locally. Spotify Premium and an active playback device are required, and the app never relays the host's audio.
 
-The room also includes Spotify Web Playback SDK support. After connecting Spotify, choose a genre and press **Random track** to play a matching track inside the Airwave page. Browser playback requires Spotify Premium, HTTPS, and the user's click to start playback.
+The room also includes Spotify Web Playback SDK support. After connecting Spotify, choose a genre and press **Play genre** to play a matching track inside the Airwave page. Track selection uses Spotify Search with a randomized result offset and a per-session genre cache; it does not use the deprecated Recommendations API. Browser playback requires Spotify Premium, HTTPS, and the user's click to start playback.
+
+### Production security note
+
+This repository is currently a static Vercel build. Access and refresh tokens are kept in the current browser session so the demo can run without a backend. Production deployment should move OAuth token exchange and refresh into a server/API route or encrypted httpOnly cookie, and replace PeerJS room signaling with an authenticated realtime provider. Tokens must remain isolated per user session and must never be shared as room state.
